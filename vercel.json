@@ -4,7 +4,7 @@
       "src": "package.json",
       "use": "@vercel/node",
       "config": {
-        "distDir": "public"
+        "distDir": "dist"
       }
     }
   ]
