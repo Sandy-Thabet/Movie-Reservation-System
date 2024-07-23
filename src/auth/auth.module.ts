@@ -4,8 +4,9 @@ import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { SharedModule } from 'src/shared/shared.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { NotificationsModule } from 'src/notifications/notifications.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtStrategy } from './strategy/jwt.strategy';
 
 @Module({
   imports: [
@@ -16,12 +17,12 @@ import { NotificationsModule } from 'src/notifications/notifications.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: '5m' },
+        secret: configService.get<string>('JWT_SECRET'), // Make sure to set this environment variable
+        signOptions: { expiresIn: '1h' },
       }),
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}
