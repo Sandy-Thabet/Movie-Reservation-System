@@ -68,11 +68,11 @@ model Schedule {
 
 model Movie {
   id          Int        @id @default(autoincrement())
-  title       String
+  title       String     @unique
   genre       String
-  actors      String
-  duartion    Float
-  description String
+  actors      String?
+  duration    String
+  description String?
   schedule    Schedule[]
 }
 

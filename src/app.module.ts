@@ -6,9 +6,10 @@ import { SharedModule } from './shared/shared.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { MailService } from './notifications/mails/mails.service';
 import { JwtService } from '@nestjs/jwt';
+import { MoviesModule } from './movies/movies.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, UsersModule, SharedModule, NotificationsModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, UsersModule, SharedModule, NotificationsModule, MoviesModule],
   controllers: [],
   providers: [MailService, JwtService],
 })

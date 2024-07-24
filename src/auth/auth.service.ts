@@ -8,7 +8,6 @@ import { MailService } from 'src/notifications/mails/mails.service';
 import { ForgetPassDto } from './dto/forget-password.dto';
 import { VerificationCodeService } from 'src/notifications/verification-code.service';
 import { ChangePassDto } from './dto/change-password.dto';
-import { UpdateMeDto } from './dto/update-me.dto';
 import { User } from '@prisma/client';
 
 @Injectable()
@@ -97,32 +96,5 @@ export class AuthService {
     const updatedUser = await this.prismaService.user.update({ where: { email: user.email }, data: { password: hashedPass } });
 
     return { updatedUser };
-  }
-
-  async updateMe(userId: number, dto: UpdateMeDto): Promise<{ user: User }> {
-    const currentUser = await this.prismaService.user.findUnique({ where: { id: userId } });
-
-    if (!currentUser) {
-      throw new NotFoundException('User is not found.');
-    }
-
-    const user = await this.prismaService.user.update({ where: { id: userId }, data: { ...currentUser, ...dto } });
-
-    delete user.password;
-
-    return { user };
-  }
-
-  async getMe(userId: number): Promise<{ user: User }> {
-    const user = await this.prismaService.user.findUnique({ where: { id: userId } });
-
-    if (!user) {
-      throw new NotFoundException('User not found.');
-    }
-
-    delete user.password;
-    delete user.verificationCode;
-
-    return { user };
   }
 }
