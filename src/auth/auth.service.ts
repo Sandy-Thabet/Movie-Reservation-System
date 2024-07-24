@@ -81,7 +81,7 @@ export class AuthService {
     return { code };
   }
 
-  async changePassword(dto: ChangePassDto): Promise<{ updatedUser: User }> {
+  async confirmResetPassword(dto: ChangePassDto): Promise<{ updatedUser: User }> {
     const user = await this.prismaService.user.findUnique({ where: { email: dto.email } });
 
     if (!user) {
@@ -89,7 +89,7 @@ export class AuthService {
     }
 
     if (user.verificationCode !== dto.verificationCode) {
-      throw new BadRequestException('Invald data');
+      throw new BadRequestException('Invalid data');
     }
 
     const hashedPass = await bcrypt.hash(dto.password, 12);
@@ -109,6 +109,19 @@ export class AuthService {
     const user = await this.prismaService.user.update({ where: { id: userId }, data: { ...currentUser, ...dto } });
 
     delete user.password;
+
+    return { user };
+  }
+
+  async getMe(userId: number): Promise<{ user: User }> {
+    const user = await this.prismaService.user.findUnique({ where: { id: userId } });
+
+    if (!user) {
+      throw new NotFoundException('User not found.');
+    }
+
+    delete user.password;
+    delete user.verificationCode;
 
     return { user };
   }
