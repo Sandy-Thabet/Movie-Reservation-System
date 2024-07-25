@@ -12,6 +12,12 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
 
+  app.enableCors({
+    origin: [configService.get('LOCAL_URL'), configService.get('PROD_URL')],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   await app.listen(configService.get('PORT') || 3080);
 }
 bootstrap();
