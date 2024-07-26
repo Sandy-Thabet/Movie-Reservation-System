@@ -7,10 +7,11 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { MailService } from './notifications/mails/mails.service';
 import { JwtService } from '@nestjs/jwt';
 import { MoviesModule } from './movies/movies.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, UsersModule, SharedModule, NotificationsModule, MoviesModule],
-  controllers: [],
+  controllers: [AppController],
   providers: [MailService, JwtService],
 })
 export class AppModule {}
