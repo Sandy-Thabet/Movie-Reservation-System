@@ -8,7 +8,7 @@ import { MailService } from 'src/notifications/mails/mails.service';
 import { ForgetPassDto } from './dto/forget-password.dto';
 import { VerificationCodeService } from 'src/notifications/verification-code.service';
 import { ChangePassDto } from './dto/change-password.dto';
-import { User } from '@prisma/client';
+import { User } from 'prisma/generated/client';
 
 @Injectable()
 export class AuthService {

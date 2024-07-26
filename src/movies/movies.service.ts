@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/shared/prisma.service';
 import { MovieDto } from './dto/movies.dto';
 import { FilterationDto } from './dto/filteration.dto';
-import { Movie } from '@prisma/client';
+import { Movie } from 'prisma/generated/client';
 
 @Injectable()
 export class MoviesService {
