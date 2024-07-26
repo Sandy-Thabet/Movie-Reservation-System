@@ -11,5 +11,11 @@
       "src": "/(.*)",
       "dest": "dist/main.js"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "DATABASE_URL": "postgresql://postgres:12345678@localhost:5432/movie-reservation-system?schema=public"
+    },
+    "buildCommand": "npm run build && npx prisma generate"
+  }
 }
