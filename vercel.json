@@ -13,5 +13,10 @@
       "dest": "dist/main.js"
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "functions": {
+    "dist/main.js": {
+      "includeFiles": "prisma/schema.prisma"
+    }
+  }
 }
