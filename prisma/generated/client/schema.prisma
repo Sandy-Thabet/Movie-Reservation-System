@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               Int           @id @default(autoincrement())
+  email            String        @unique
+  password         String
+  fullName         String
+  phoneNumber      String        @unique
+  verificationCode String        @default("")
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  reservations     Reservation[]
+}
+
+model Reservation {
+  id            Int           @id @default(autoincrement())
+  userId        Int
+  scheduleId    Int
+  seats         Seat[]
+  paymentStatus PaymentStatus @default(Pending)
+  totalAmount   Float
+  user          User          @relation(fields: [userId], references: [id])
+  schedule      Schedule      @relation(fields: [scheduleId], references: [id])
+}
+
+model Theater {
+  id              Int        @id @default(autoincrement())
+  name            String
+  location        String
+  seatingCapacity Int
+  schedules       Schedule[]
+  seats           Seat[]
+}
+
+model Seat {
+  id           Int           @id @default(autoincrement())
+  theaterId    Int
+  row          Int
+  number       Int
+  reserved     Boolean       @default(false)
+  theater      Theater       @relation(fields: [theaterId], references: [id])
+  reservations Reservation[]
+}
+
+model Schedule {
+  id           Int           @id @default(autoincrement())
+  movieId      Int
+  theaterId    Int
+  showTime     DateTime
+  endTime      DateTime
+  movie        Movie         @relation(fields: [movieId], references: [id])
+  theater      Theater       @relation(fields: [theaterId], references: [id])
+  reservations Reservation[]
+}
+
+model Movie {
+  id          Int        @id @default(autoincrement())
+  title       String     @unique
+  genre       String
+  actors      String?
+  duration    String
+  description String?
+  schedule    Schedule[]
+}
+
+enum PaymentStatus {
+  Pending
+  InProgress
+  Completed
+  Failed
+  Cancelled
+}
