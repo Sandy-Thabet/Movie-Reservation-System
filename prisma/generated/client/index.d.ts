@@ -4731,7 +4731,7 @@ export namespace Prisma {
     theaterId: number
     row: number
     number: number
-    reserved: boolean
+    reserved: boolean | null
     _count: SeatCountAggregateOutputType | null
     _avg: SeatAvgAggregateOutputType | null
     _sum: SeatSumAggregateOutputType | null
@@ -4801,7 +4801,7 @@ export namespace Prisma {
       theaterId: number
       row: number
       number: number
-      reserved: boolean
+      reserved: boolean | null
     }, ExtArgs["result"]["seat"]>
     composites: {}
   }
@@ -7945,7 +7945,7 @@ export namespace Prisma {
     theaterId?: IntFilter<"Seat"> | number
     row?: IntFilter<"Seat"> | number
     number?: IntFilter<"Seat"> | number
-    reserved?: BoolFilter<"Seat"> | boolean
+    reserved?: BoolNullableFilter<"Seat"> | boolean | null
     theater?: XOR<TheaterRelationFilter, TheaterWhereInput>
     reservations?: ReservationListRelationFilter
   }
@@ -7955,7 +7955,7 @@ export namespace Prisma {
     theaterId?: SortOrder
     row?: SortOrder
     number?: SortOrder
-    reserved?: SortOrder
+    reserved?: SortOrderInput | SortOrder
     theater?: TheaterOrderByWithRelationInput
     reservations?: ReservationOrderByRelationAggregateInput
   }
@@ -7968,7 +7968,7 @@ export namespace Prisma {
     theaterId?: IntFilter<"Seat"> | number
     row?: IntFilter<"Seat"> | number
     number?: IntFilter<"Seat"> | number
-    reserved?: BoolFilter<"Seat"> | boolean
+    reserved?: BoolNullableFilter<"Seat"> | boolean | null
     theater?: XOR<TheaterRelationFilter, TheaterWhereInput>
     reservations?: ReservationListRelationFilter
   }, "id">
@@ -7978,7 +7978,7 @@ export namespace Prisma {
     theaterId?: SortOrder
     row?: SortOrder
     number?: SortOrder
-    reserved?: SortOrder
+    reserved?: SortOrderInput | SortOrder
     _count?: SeatCountOrderByAggregateInput
     _avg?: SeatAvgOrderByAggregateInput
     _max?: SeatMaxOrderByAggregateInput
@@ -7994,7 +7994,7 @@ export namespace Prisma {
     theaterId?: IntWithAggregatesFilter<"Seat"> | number
     row?: IntWithAggregatesFilter<"Seat"> | number
     number?: IntWithAggregatesFilter<"Seat"> | number
-    reserved?: BoolWithAggregatesFilter<"Seat"> | boolean
+    reserved?: BoolNullableWithAggregatesFilter<"Seat"> | boolean | null
   }
 
   export type ScheduleWhereInput = {
@@ -8312,7 +8312,7 @@ export namespace Prisma {
   export type SeatCreateInput = {
     row: number
     number: number
-    reserved?: boolean
+    reserved?: boolean | null
     theater: TheaterCreateNestedOneWithoutSeatsInput
     reservations?: ReservationCreateNestedManyWithoutSeatsInput
   }
@@ -8322,14 +8322,14 @@ export namespace Prisma {
     theaterId: number
     row: number
     number: number
-    reserved?: boolean
+    reserved?: boolean | null
     reservations?: ReservationUncheckedCreateNestedManyWithoutSeatsInput
   }
 
   export type SeatUpdateInput = {
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    reserved?: BoolFieldUpdateOperationsInput | boolean
+    reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
     theater?: TheaterUpdateOneRequiredWithoutSeatsNestedInput
     reservations?: ReservationUpdateManyWithoutSeatsNestedInput
   }
@@ -8339,7 +8339,7 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    reserved?: BoolFieldUpdateOperationsInput | boolean
+    reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
     reservations?: ReservationUncheckedUpdateManyWithoutSeatsNestedInput
   }
 
@@ -8348,13 +8348,13 @@ export namespace Prisma {
     theaterId: number
     row: number
     number: number
-    reserved?: boolean
+    reserved?: boolean | null
   }
 
   export type SeatUpdateManyMutationInput = {
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    reserved?: BoolFieldUpdateOperationsInput | boolean
+    reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type SeatUncheckedUpdateManyInput = {
@@ -8362,7 +8362,7 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    reserved?: BoolFieldUpdateOperationsInput | boolean
+    reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type ScheduleCreateInput = {
@@ -8763,14 +8763,19 @@ export namespace Prisma {
     seatingCapacity?: SortOrder
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
   export type TheaterRelationFilter = {
     is?: TheaterWhereInput
     isNot?: TheaterWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type SeatCountOrderByAggregateInput = {
@@ -8811,12 +8816,12 @@ export namespace Prisma {
     number?: SortOrder
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type MovieRelationFilter = {
@@ -8873,11 +8878,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type MovieCountOrderByAggregateInput = {
@@ -9171,8 +9171,8 @@ export namespace Prisma {
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
   }
 
   export type TheaterUpdateOneRequiredWithoutSeatsNestedInput = {
@@ -9452,17 +9452,28 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -9494,17 +9505,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type ReservationCreateWithoutUserInput = {
@@ -9562,7 +9562,7 @@ export namespace Prisma {
   export type SeatCreateWithoutReservationsInput = {
     row: number
     number: number
-    reserved?: boolean
+    reserved?: boolean | null
     theater: TheaterCreateNestedOneWithoutSeatsInput
   }
 
@@ -9571,7 +9571,7 @@ export namespace Prisma {
     theaterId: number
     row: number
     number: number
-    reserved?: boolean
+    reserved?: boolean | null
   }
 
   export type SeatCreateOrConnectWithoutReservationsInput = {
@@ -9649,7 +9649,7 @@ export namespace Prisma {
     theaterId?: IntFilter<"Seat"> | number
     row?: IntFilter<"Seat"> | number
     number?: IntFilter<"Seat"> | number
-    reserved?: BoolFilter<"Seat"> | boolean
+    reserved?: BoolNullableFilter<"Seat"> | boolean | null
   }
 
   export type UserUpsertWithoutReservationsInput = {
@@ -9738,7 +9738,7 @@ export namespace Prisma {
   export type SeatCreateWithoutTheaterInput = {
     row: number
     number: number
-    reserved?: boolean
+    reserved?: boolean | null
     reservations?: ReservationCreateNestedManyWithoutSeatsInput
   }
 
@@ -9746,7 +9746,7 @@ export namespace Prisma {
     id?: number
     row: number
     number: number
-    reserved?: boolean
+    reserved?: boolean | null
     reservations?: ReservationUncheckedCreateNestedManyWithoutSeatsInput
   }
 
@@ -10095,7 +10095,7 @@ export namespace Prisma {
   export type SeatUpdateWithoutReservationsInput = {
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    reserved?: BoolFieldUpdateOperationsInput | boolean
+    reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
     theater?: TheaterUpdateOneRequiredWithoutSeatsNestedInput
   }
 
@@ -10104,7 +10104,7 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    reserved?: BoolFieldUpdateOperationsInput | boolean
+    reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type SeatUncheckedUpdateManyWithoutReservationsInput = {
@@ -10112,7 +10112,7 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    reserved?: BoolFieldUpdateOperationsInput | boolean
+    reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type ScheduleCreateManyTheaterInput = {
@@ -10126,7 +10126,7 @@ export namespace Prisma {
     id?: number
     row: number
     number: number
-    reserved?: boolean
+    reserved?: boolean | null
   }
 
   export type ScheduleUpdateWithoutTheaterInput = {
@@ -10154,7 +10154,7 @@ export namespace Prisma {
   export type SeatUpdateWithoutTheaterInput = {
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    reserved?: BoolFieldUpdateOperationsInput | boolean
+    reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
     reservations?: ReservationUpdateManyWithoutSeatsNestedInput
   }
 
@@ -10162,7 +10162,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    reserved?: BoolFieldUpdateOperationsInput | boolean
+    reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
     reservations?: ReservationUncheckedUpdateManyWithoutSeatsNestedInput
   }
 
@@ -10170,7 +10170,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    reserved?: BoolFieldUpdateOperationsInput | boolean
+    reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type ReservationUpdateWithoutSeatsInput = {

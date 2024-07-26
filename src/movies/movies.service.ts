@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/shared/prisma.service';
 import { MovieDto } from './dto/movies.dto';
 import { FilterationDto } from './dto/filteration.dto';
@@ -9,6 +9,12 @@ export class MoviesService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async addMovie(dto: MovieDto): Promise<{ movie: Movie }> {
+    const isExist = await this.prismaService.movie.findFirst({ where: { title: dto.title, duration: dto.duration, genre: dto.genre } });
+
+    if (isExist) {
+      throw new BadRequestException('Movie is already exist.');
+    }
+
     const movie = await this.prismaService.movie.create({ data: { ...dto } });
 
     return { movie };

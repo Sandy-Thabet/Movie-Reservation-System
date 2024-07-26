@@ -51,7 +51,7 @@ model Seat {
   theaterId    Int
   row          Int
   number       Int
-  reserved     Boolean       @default(false)
+  reserved     Boolean?      @default(false)
   theater      Theater       @relation(fields: [theaterId], references: [id])
   reservations Reservation[]
 }

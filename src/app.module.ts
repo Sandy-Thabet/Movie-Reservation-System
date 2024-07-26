@@ -8,9 +8,22 @@ import { MailService } from './notifications/mails/mails.service';
 import { JwtService } from '@nestjs/jwt';
 import { MoviesModule } from './movies/movies.module';
 import { AppController } from './app.controller';
+import { TheatersModule } from './theaters/theaters.module';
+import { SeatsModule } from './seats/seats.module';
+import { SchedulesModule } from './schedule/schedules.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, UsersModule, SharedModule, NotificationsModule, MoviesModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule,
+    UsersModule,
+    SharedModule,
+    NotificationsModule,
+    MoviesModule,
+    TheatersModule,
+    SeatsModule,
+    SchedulesModule,
+  ],
   controllers: [AppController],
   providers: [MailService, JwtService],
 })
