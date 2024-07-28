@@ -150,6 +150,8 @@ exports.Prisma.SeatScalarFieldEnum = {
   theaterId: 'theaterId',
   row: 'row',
   number: 'number',
+  type: 'type',
+  additionalCost: 'additionalCost',
   reserved: 'reserved'
 };
 
@@ -158,7 +160,8 @@ exports.Prisma.ScheduleScalarFieldEnum = {
   movieId: 'movieId',
   theaterId: 'theaterId',
   showTime: 'showTime',
-  endTime: 'endTime'
+  endTime: 'endTime',
+  additionalCost: 'additionalCost'
 };
 
 exports.Prisma.MovieScalarFieldEnum = {
@@ -167,7 +170,8 @@ exports.Prisma.MovieScalarFieldEnum = {
   genre: 'genre',
   actors: 'actors',
   duration: 'duration',
-  description: 'description'
+  description: 'description',
+  price: 'price'
 };
 
 exports.Prisma.SortOrder = {
@@ -190,6 +194,11 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   Completed: 'Completed',
   Failed: 'Failed',
   Cancelled: 'Cancelled'
+};
+
+exports.SeatType = exports.$Enums.SeatType = {
+  Normal: 'Normal',
+  VIP: 'VIP'
 };
 
 exports.Prisma.ModelName = {

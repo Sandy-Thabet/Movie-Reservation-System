@@ -58,11 +58,23 @@ export namespace $Enums {
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
+
+export const SeatType: {
+  Normal: 'Normal',
+  VIP: 'VIP'
+};
+
+export type SeatType = (typeof SeatType)[keyof typeof SeatType]
+
 }
 
 export type PaymentStatus = $Enums.PaymentStatus
 
 export const PaymentStatus: typeof $Enums.PaymentStatus
+
+export type SeatType = $Enums.SeatType
+
+export const SeatType: typeof $Enums.SeatType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -4566,6 +4578,7 @@ export namespace Prisma {
     theaterId: number | null
     row: number | null
     number: number | null
+    additionalCost: number | null
   }
 
   export type SeatSumAggregateOutputType = {
@@ -4573,6 +4586,7 @@ export namespace Prisma {
     theaterId: number | null
     row: number | null
     number: number | null
+    additionalCost: number | null
   }
 
   export type SeatMinAggregateOutputType = {
@@ -4580,6 +4594,8 @@ export namespace Prisma {
     theaterId: number | null
     row: number | null
     number: number | null
+    type: $Enums.SeatType | null
+    additionalCost: number | null
     reserved: boolean | null
   }
 
@@ -4588,6 +4604,8 @@ export namespace Prisma {
     theaterId: number | null
     row: number | null
     number: number | null
+    type: $Enums.SeatType | null
+    additionalCost: number | null
     reserved: boolean | null
   }
 
@@ -4596,6 +4614,8 @@ export namespace Prisma {
     theaterId: number
     row: number
     number: number
+    type: number
+    additionalCost: number
     reserved: number
     _all: number
   }
@@ -4606,6 +4626,7 @@ export namespace Prisma {
     theaterId?: true
     row?: true
     number?: true
+    additionalCost?: true
   }
 
   export type SeatSumAggregateInputType = {
@@ -4613,6 +4634,7 @@ export namespace Prisma {
     theaterId?: true
     row?: true
     number?: true
+    additionalCost?: true
   }
 
   export type SeatMinAggregateInputType = {
@@ -4620,6 +4642,8 @@ export namespace Prisma {
     theaterId?: true
     row?: true
     number?: true
+    type?: true
+    additionalCost?: true
     reserved?: true
   }
 
@@ -4628,6 +4652,8 @@ export namespace Prisma {
     theaterId?: true
     row?: true
     number?: true
+    type?: true
+    additionalCost?: true
     reserved?: true
   }
 
@@ -4636,6 +4662,8 @@ export namespace Prisma {
     theaterId?: true
     row?: true
     number?: true
+    type?: true
+    additionalCost?: true
     reserved?: true
     _all?: true
   }
@@ -4731,6 +4759,8 @@ export namespace Prisma {
     theaterId: number
     row: number
     number: number
+    type: $Enums.SeatType
+    additionalCost: number
     reserved: boolean | null
     _count: SeatCountAggregateOutputType | null
     _avg: SeatAvgAggregateOutputType | null
@@ -4758,6 +4788,8 @@ export namespace Prisma {
     theaterId?: boolean
     row?: boolean
     number?: boolean
+    type?: boolean
+    additionalCost?: boolean
     reserved?: boolean
     theater?: boolean | TheaterDefaultArgs<ExtArgs>
     reservations?: boolean | Seat$reservationsArgs<ExtArgs>
@@ -4769,6 +4801,8 @@ export namespace Prisma {
     theaterId?: boolean
     row?: boolean
     number?: boolean
+    type?: boolean
+    additionalCost?: boolean
     reserved?: boolean
     theater?: boolean | TheaterDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["seat"]>
@@ -4778,6 +4812,8 @@ export namespace Prisma {
     theaterId?: boolean
     row?: boolean
     number?: boolean
+    type?: boolean
+    additionalCost?: boolean
     reserved?: boolean
   }
 
@@ -4801,6 +4837,8 @@ export namespace Prisma {
       theaterId: number
       row: number
       number: number
+      type: $Enums.SeatType
+      additionalCost: number
       reserved: boolean | null
     }, ExtArgs["result"]["seat"]>
     composites: {}
@@ -5201,6 +5239,8 @@ export namespace Prisma {
     readonly theaterId: FieldRef<"Seat", 'Int'>
     readonly row: FieldRef<"Seat", 'Int'>
     readonly number: FieldRef<"Seat", 'Int'>
+    readonly type: FieldRef<"Seat", 'SeatType'>
+    readonly additionalCost: FieldRef<"Seat", 'Float'>
     readonly reserved: FieldRef<"Seat", 'Boolean'>
   }
     
@@ -5570,12 +5610,14 @@ export namespace Prisma {
     id: number | null
     movieId: number | null
     theaterId: number | null
+    additionalCost: number | null
   }
 
   export type ScheduleSumAggregateOutputType = {
     id: number | null
     movieId: number | null
     theaterId: number | null
+    additionalCost: number | null
   }
 
   export type ScheduleMinAggregateOutputType = {
@@ -5584,6 +5626,7 @@ export namespace Prisma {
     theaterId: number | null
     showTime: Date | null
     endTime: Date | null
+    additionalCost: number | null
   }
 
   export type ScheduleMaxAggregateOutputType = {
@@ -5592,6 +5635,7 @@ export namespace Prisma {
     theaterId: number | null
     showTime: Date | null
     endTime: Date | null
+    additionalCost: number | null
   }
 
   export type ScheduleCountAggregateOutputType = {
@@ -5600,6 +5644,7 @@ export namespace Prisma {
     theaterId: number
     showTime: number
     endTime: number
+    additionalCost: number
     _all: number
   }
 
@@ -5608,12 +5653,14 @@ export namespace Prisma {
     id?: true
     movieId?: true
     theaterId?: true
+    additionalCost?: true
   }
 
   export type ScheduleSumAggregateInputType = {
     id?: true
     movieId?: true
     theaterId?: true
+    additionalCost?: true
   }
 
   export type ScheduleMinAggregateInputType = {
@@ -5622,6 +5669,7 @@ export namespace Prisma {
     theaterId?: true
     showTime?: true
     endTime?: true
+    additionalCost?: true
   }
 
   export type ScheduleMaxAggregateInputType = {
@@ -5630,6 +5678,7 @@ export namespace Prisma {
     theaterId?: true
     showTime?: true
     endTime?: true
+    additionalCost?: true
   }
 
   export type ScheduleCountAggregateInputType = {
@@ -5638,6 +5687,7 @@ export namespace Prisma {
     theaterId?: true
     showTime?: true
     endTime?: true
+    additionalCost?: true
     _all?: true
   }
 
@@ -5733,6 +5783,7 @@ export namespace Prisma {
     theaterId: number
     showTime: Date
     endTime: Date
+    additionalCost: number
     _count: ScheduleCountAggregateOutputType | null
     _avg: ScheduleAvgAggregateOutputType | null
     _sum: ScheduleSumAggregateOutputType | null
@@ -5760,6 +5811,7 @@ export namespace Prisma {
     theaterId?: boolean
     showTime?: boolean
     endTime?: boolean
+    additionalCost?: boolean
     movie?: boolean | MovieDefaultArgs<ExtArgs>
     theater?: boolean | TheaterDefaultArgs<ExtArgs>
     reservations?: boolean | Schedule$reservationsArgs<ExtArgs>
@@ -5772,6 +5824,7 @@ export namespace Prisma {
     theaterId?: boolean
     showTime?: boolean
     endTime?: boolean
+    additionalCost?: boolean
     movie?: boolean | MovieDefaultArgs<ExtArgs>
     theater?: boolean | TheaterDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["schedule"]>
@@ -5782,6 +5835,7 @@ export namespace Prisma {
     theaterId?: boolean
     showTime?: boolean
     endTime?: boolean
+    additionalCost?: boolean
   }
 
   export type ScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5808,6 +5862,7 @@ export namespace Prisma {
       theaterId: number
       showTime: Date
       endTime: Date
+      additionalCost: number
     }, ExtArgs["result"]["schedule"]>
     composites: {}
   }
@@ -6209,6 +6264,7 @@ export namespace Prisma {
     readonly theaterId: FieldRef<"Schedule", 'Int'>
     readonly showTime: FieldRef<"Schedule", 'DateTime'>
     readonly endTime: FieldRef<"Schedule", 'DateTime'>
+    readonly additionalCost: FieldRef<"Schedule", 'Float'>
   }
     
 
@@ -6575,10 +6631,12 @@ export namespace Prisma {
 
   export type MovieAvgAggregateOutputType = {
     id: number | null
+    price: number | null
   }
 
   export type MovieSumAggregateOutputType = {
     id: number | null
+    price: number | null
   }
 
   export type MovieMinAggregateOutputType = {
@@ -6588,6 +6646,7 @@ export namespace Prisma {
     actors: string | null
     duration: string | null
     description: string | null
+    price: number | null
   }
 
   export type MovieMaxAggregateOutputType = {
@@ -6597,6 +6656,7 @@ export namespace Prisma {
     actors: string | null
     duration: string | null
     description: string | null
+    price: number | null
   }
 
   export type MovieCountAggregateOutputType = {
@@ -6606,16 +6666,19 @@ export namespace Prisma {
     actors: number
     duration: number
     description: number
+    price: number
     _all: number
   }
 
 
   export type MovieAvgAggregateInputType = {
     id?: true
+    price?: true
   }
 
   export type MovieSumAggregateInputType = {
     id?: true
+    price?: true
   }
 
   export type MovieMinAggregateInputType = {
@@ -6625,6 +6688,7 @@ export namespace Prisma {
     actors?: true
     duration?: true
     description?: true
+    price?: true
   }
 
   export type MovieMaxAggregateInputType = {
@@ -6634,6 +6698,7 @@ export namespace Prisma {
     actors?: true
     duration?: true
     description?: true
+    price?: true
   }
 
   export type MovieCountAggregateInputType = {
@@ -6643,6 +6708,7 @@ export namespace Prisma {
     actors?: true
     duration?: true
     description?: true
+    price?: true
     _all?: true
   }
 
@@ -6739,6 +6805,7 @@ export namespace Prisma {
     actors: string | null
     duration: string
     description: string | null
+    price: number
     _count: MovieCountAggregateOutputType | null
     _avg: MovieAvgAggregateOutputType | null
     _sum: MovieSumAggregateOutputType | null
@@ -6767,6 +6834,7 @@ export namespace Prisma {
     actors?: boolean
     duration?: boolean
     description?: boolean
+    price?: boolean
     schedule?: boolean | Movie$scheduleArgs<ExtArgs>
     _count?: boolean | MovieCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["movie"]>
@@ -6778,6 +6846,7 @@ export namespace Prisma {
     actors?: boolean
     duration?: boolean
     description?: boolean
+    price?: boolean
   }, ExtArgs["result"]["movie"]>
 
   export type MovieSelectScalar = {
@@ -6787,6 +6856,7 @@ export namespace Prisma {
     actors?: boolean
     duration?: boolean
     description?: boolean
+    price?: boolean
   }
 
   export type MovieInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6807,6 +6877,7 @@ export namespace Prisma {
       actors: string | null
       duration: string
       description: string | null
+      price: number
     }, ExtArgs["result"]["movie"]>
     composites: {}
   }
@@ -7207,6 +7278,7 @@ export namespace Prisma {
     readonly actors: FieldRef<"Movie", 'String'>
     readonly duration: FieldRef<"Movie", 'String'>
     readonly description: FieldRef<"Movie", 'String'>
+    readonly price: FieldRef<"Movie", 'Float'>
   }
     
 
@@ -7609,6 +7681,8 @@ export namespace Prisma {
     theaterId: 'theaterId',
     row: 'row',
     number: 'number',
+    type: 'type',
+    additionalCost: 'additionalCost',
     reserved: 'reserved'
   };
 
@@ -7620,7 +7694,8 @@ export namespace Prisma {
     movieId: 'movieId',
     theaterId: 'theaterId',
     showTime: 'showTime',
-    endTime: 'endTime'
+    endTime: 'endTime',
+    additionalCost: 'additionalCost'
   };
 
   export type ScheduleScalarFieldEnum = (typeof ScheduleScalarFieldEnum)[keyof typeof ScheduleScalarFieldEnum]
@@ -7632,7 +7707,8 @@ export namespace Prisma {
     genre: 'genre',
     actors: 'actors',
     duration: 'duration',
-    description: 'description'
+    description: 'description',
+    price: 'price'
   };
 
   export type MovieScalarFieldEnum = (typeof MovieScalarFieldEnum)[keyof typeof MovieScalarFieldEnum]
@@ -7734,6 +7810,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SeatType'
+   */
+  export type EnumSeatTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeatType'>
+    
+
+
+  /**
+   * Reference to a field of type 'SeatType[]'
+   */
+  export type ListEnumSeatTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SeatType[]'>
     
 
 
@@ -7945,6 +8035,8 @@ export namespace Prisma {
     theaterId?: IntFilter<"Seat"> | number
     row?: IntFilter<"Seat"> | number
     number?: IntFilter<"Seat"> | number
+    type?: EnumSeatTypeFilter<"Seat"> | $Enums.SeatType
+    additionalCost?: FloatFilter<"Seat"> | number
     reserved?: BoolNullableFilter<"Seat"> | boolean | null
     theater?: XOR<TheaterRelationFilter, TheaterWhereInput>
     reservations?: ReservationListRelationFilter
@@ -7955,6 +8047,8 @@ export namespace Prisma {
     theaterId?: SortOrder
     row?: SortOrder
     number?: SortOrder
+    type?: SortOrder
+    additionalCost?: SortOrder
     reserved?: SortOrderInput | SortOrder
     theater?: TheaterOrderByWithRelationInput
     reservations?: ReservationOrderByRelationAggregateInput
@@ -7968,6 +8062,8 @@ export namespace Prisma {
     theaterId?: IntFilter<"Seat"> | number
     row?: IntFilter<"Seat"> | number
     number?: IntFilter<"Seat"> | number
+    type?: EnumSeatTypeFilter<"Seat"> | $Enums.SeatType
+    additionalCost?: FloatFilter<"Seat"> | number
     reserved?: BoolNullableFilter<"Seat"> | boolean | null
     theater?: XOR<TheaterRelationFilter, TheaterWhereInput>
     reservations?: ReservationListRelationFilter
@@ -7978,6 +8074,8 @@ export namespace Prisma {
     theaterId?: SortOrder
     row?: SortOrder
     number?: SortOrder
+    type?: SortOrder
+    additionalCost?: SortOrder
     reserved?: SortOrderInput | SortOrder
     _count?: SeatCountOrderByAggregateInput
     _avg?: SeatAvgOrderByAggregateInput
@@ -7994,6 +8092,8 @@ export namespace Prisma {
     theaterId?: IntWithAggregatesFilter<"Seat"> | number
     row?: IntWithAggregatesFilter<"Seat"> | number
     number?: IntWithAggregatesFilter<"Seat"> | number
+    type?: EnumSeatTypeWithAggregatesFilter<"Seat"> | $Enums.SeatType
+    additionalCost?: FloatWithAggregatesFilter<"Seat"> | number
     reserved?: BoolNullableWithAggregatesFilter<"Seat"> | boolean | null
   }
 
@@ -8006,6 +8106,7 @@ export namespace Prisma {
     theaterId?: IntFilter<"Schedule"> | number
     showTime?: DateTimeFilter<"Schedule"> | Date | string
     endTime?: DateTimeFilter<"Schedule"> | Date | string
+    additionalCost?: FloatFilter<"Schedule"> | number
     movie?: XOR<MovieRelationFilter, MovieWhereInput>
     theater?: XOR<TheaterRelationFilter, TheaterWhereInput>
     reservations?: ReservationListRelationFilter
@@ -8017,6 +8118,7 @@ export namespace Prisma {
     theaterId?: SortOrder
     showTime?: SortOrder
     endTime?: SortOrder
+    additionalCost?: SortOrder
     movie?: MovieOrderByWithRelationInput
     theater?: TheaterOrderByWithRelationInput
     reservations?: ReservationOrderByRelationAggregateInput
@@ -8031,6 +8133,7 @@ export namespace Prisma {
     theaterId?: IntFilter<"Schedule"> | number
     showTime?: DateTimeFilter<"Schedule"> | Date | string
     endTime?: DateTimeFilter<"Schedule"> | Date | string
+    additionalCost?: FloatFilter<"Schedule"> | number
     movie?: XOR<MovieRelationFilter, MovieWhereInput>
     theater?: XOR<TheaterRelationFilter, TheaterWhereInput>
     reservations?: ReservationListRelationFilter
@@ -8042,6 +8145,7 @@ export namespace Prisma {
     theaterId?: SortOrder
     showTime?: SortOrder
     endTime?: SortOrder
+    additionalCost?: SortOrder
     _count?: ScheduleCountOrderByAggregateInput
     _avg?: ScheduleAvgOrderByAggregateInput
     _max?: ScheduleMaxOrderByAggregateInput
@@ -8058,6 +8162,7 @@ export namespace Prisma {
     theaterId?: IntWithAggregatesFilter<"Schedule"> | number
     showTime?: DateTimeWithAggregatesFilter<"Schedule"> | Date | string
     endTime?: DateTimeWithAggregatesFilter<"Schedule"> | Date | string
+    additionalCost?: FloatWithAggregatesFilter<"Schedule"> | number
   }
 
   export type MovieWhereInput = {
@@ -8070,6 +8175,7 @@ export namespace Prisma {
     actors?: StringNullableFilter<"Movie"> | string | null
     duration?: StringFilter<"Movie"> | string
     description?: StringNullableFilter<"Movie"> | string | null
+    price?: FloatFilter<"Movie"> | number
     schedule?: ScheduleListRelationFilter
   }
 
@@ -8080,6 +8186,7 @@ export namespace Prisma {
     actors?: SortOrderInput | SortOrder
     duration?: SortOrder
     description?: SortOrderInput | SortOrder
+    price?: SortOrder
     schedule?: ScheduleOrderByRelationAggregateInput
   }
 
@@ -8093,6 +8200,7 @@ export namespace Prisma {
     actors?: StringNullableFilter<"Movie"> | string | null
     duration?: StringFilter<"Movie"> | string
     description?: StringNullableFilter<"Movie"> | string | null
+    price?: FloatFilter<"Movie"> | number
     schedule?: ScheduleListRelationFilter
   }, "id" | "title">
 
@@ -8103,6 +8211,7 @@ export namespace Prisma {
     actors?: SortOrderInput | SortOrder
     duration?: SortOrder
     description?: SortOrderInput | SortOrder
+    price?: SortOrder
     _count?: MovieCountOrderByAggregateInput
     _avg?: MovieAvgOrderByAggregateInput
     _max?: MovieMaxOrderByAggregateInput
@@ -8120,6 +8229,7 @@ export namespace Prisma {
     actors?: StringNullableWithAggregatesFilter<"Movie"> | string | null
     duration?: StringWithAggregatesFilter<"Movie"> | string
     description?: StringNullableWithAggregatesFilter<"Movie"> | string | null
+    price?: FloatWithAggregatesFilter<"Movie"> | number
   }
 
   export type UserCreateInput = {
@@ -8312,6 +8422,8 @@ export namespace Prisma {
   export type SeatCreateInput = {
     row: number
     number: number
+    type?: $Enums.SeatType
+    additionalCost: number
     reserved?: boolean | null
     theater: TheaterCreateNestedOneWithoutSeatsInput
     reservations?: ReservationCreateNestedManyWithoutSeatsInput
@@ -8322,6 +8434,8 @@ export namespace Prisma {
     theaterId: number
     row: number
     number: number
+    type?: $Enums.SeatType
+    additionalCost: number
     reserved?: boolean | null
     reservations?: ReservationUncheckedCreateNestedManyWithoutSeatsInput
   }
@@ -8329,6 +8443,8 @@ export namespace Prisma {
   export type SeatUpdateInput = {
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
+    type?: EnumSeatTypeFieldUpdateOperationsInput | $Enums.SeatType
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
     theater?: TheaterUpdateOneRequiredWithoutSeatsNestedInput
     reservations?: ReservationUpdateManyWithoutSeatsNestedInput
@@ -8339,6 +8455,8 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
+    type?: EnumSeatTypeFieldUpdateOperationsInput | $Enums.SeatType
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
     reservations?: ReservationUncheckedUpdateManyWithoutSeatsNestedInput
   }
@@ -8348,12 +8466,16 @@ export namespace Prisma {
     theaterId: number
     row: number
     number: number
+    type?: $Enums.SeatType
+    additionalCost: number
     reserved?: boolean | null
   }
 
   export type SeatUpdateManyMutationInput = {
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
+    type?: EnumSeatTypeFieldUpdateOperationsInput | $Enums.SeatType
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
@@ -8362,12 +8484,15 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
+    type?: EnumSeatTypeFieldUpdateOperationsInput | $Enums.SeatType
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type ScheduleCreateInput = {
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
     movie: MovieCreateNestedOneWithoutScheduleInput
     theater: TheaterCreateNestedOneWithoutSchedulesInput
     reservations?: ReservationCreateNestedManyWithoutScheduleInput
@@ -8379,12 +8504,14 @@ export namespace Prisma {
     theaterId: number
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
     reservations?: ReservationUncheckedCreateNestedManyWithoutScheduleInput
   }
 
   export type ScheduleUpdateInput = {
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     movie?: MovieUpdateOneRequiredWithoutScheduleNestedInput
     theater?: TheaterUpdateOneRequiredWithoutSchedulesNestedInput
     reservations?: ReservationUpdateManyWithoutScheduleNestedInput
@@ -8396,6 +8523,7 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reservations?: ReservationUncheckedUpdateManyWithoutScheduleNestedInput
   }
 
@@ -8405,11 +8533,13 @@ export namespace Prisma {
     theaterId: number
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
   }
 
   export type ScheduleUpdateManyMutationInput = {
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
   }
 
   export type ScheduleUncheckedUpdateManyInput = {
@@ -8418,6 +8548,7 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
   }
 
   export type MovieCreateInput = {
@@ -8426,6 +8557,7 @@ export namespace Prisma {
     actors?: string | null
     duration: string
     description?: string | null
+    price: number
     schedule?: ScheduleCreateNestedManyWithoutMovieInput
   }
 
@@ -8436,6 +8568,7 @@ export namespace Prisma {
     actors?: string | null
     duration: string
     description?: string | null
+    price: number
     schedule?: ScheduleUncheckedCreateNestedManyWithoutMovieInput
   }
 
@@ -8445,6 +8578,7 @@ export namespace Prisma {
     actors?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: FloatFieldUpdateOperationsInput | number
     schedule?: ScheduleUpdateManyWithoutMovieNestedInput
   }
 
@@ -8455,6 +8589,7 @@ export namespace Prisma {
     actors?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: FloatFieldUpdateOperationsInput | number
     schedule?: ScheduleUncheckedUpdateManyWithoutMovieNestedInput
   }
 
@@ -8465,6 +8600,7 @@ export namespace Prisma {
     actors?: string | null
     duration: string
     description?: string | null
+    price: number
   }
 
   export type MovieUpdateManyMutationInput = {
@@ -8473,6 +8609,7 @@ export namespace Prisma {
     actors?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: FloatFieldUpdateOperationsInput | number
   }
 
   export type MovieUncheckedUpdateManyInput = {
@@ -8482,6 +8619,7 @@ export namespace Prisma {
     actors?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: FloatFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -8763,6 +8901,13 @@ export namespace Prisma {
     seatingCapacity?: SortOrder
   }
 
+  export type EnumSeatTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SeatType | EnumSeatTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SeatType[] | ListEnumSeatTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SeatType[] | ListEnumSeatTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeatTypeFilter<$PrismaModel> | $Enums.SeatType
+  }
+
   export type BoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
@@ -8783,6 +8928,8 @@ export namespace Prisma {
     theaterId?: SortOrder
     row?: SortOrder
     number?: SortOrder
+    type?: SortOrder
+    additionalCost?: SortOrder
     reserved?: SortOrder
   }
 
@@ -8791,6 +8938,7 @@ export namespace Prisma {
     theaterId?: SortOrder
     row?: SortOrder
     number?: SortOrder
+    additionalCost?: SortOrder
   }
 
   export type SeatMaxOrderByAggregateInput = {
@@ -8798,6 +8946,8 @@ export namespace Prisma {
     theaterId?: SortOrder
     row?: SortOrder
     number?: SortOrder
+    type?: SortOrder
+    additionalCost?: SortOrder
     reserved?: SortOrder
   }
 
@@ -8806,6 +8956,8 @@ export namespace Prisma {
     theaterId?: SortOrder
     row?: SortOrder
     number?: SortOrder
+    type?: SortOrder
+    additionalCost?: SortOrder
     reserved?: SortOrder
   }
 
@@ -8814,6 +8966,17 @@ export namespace Prisma {
     theaterId?: SortOrder
     row?: SortOrder
     number?: SortOrder
+    additionalCost?: SortOrder
+  }
+
+  export type EnumSeatTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SeatType | EnumSeatTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SeatType[] | ListEnumSeatTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SeatType[] | ListEnumSeatTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeatTypeWithAggregatesFilter<$PrismaModel> | $Enums.SeatType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSeatTypeFilter<$PrismaModel>
+    _max?: NestedEnumSeatTypeFilter<$PrismaModel>
   }
 
   export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8835,12 +8998,14 @@ export namespace Prisma {
     theaterId?: SortOrder
     showTime?: SortOrder
     endTime?: SortOrder
+    additionalCost?: SortOrder
   }
 
   export type ScheduleAvgOrderByAggregateInput = {
     id?: SortOrder
     movieId?: SortOrder
     theaterId?: SortOrder
+    additionalCost?: SortOrder
   }
 
   export type ScheduleMaxOrderByAggregateInput = {
@@ -8849,6 +9014,7 @@ export namespace Prisma {
     theaterId?: SortOrder
     showTime?: SortOrder
     endTime?: SortOrder
+    additionalCost?: SortOrder
   }
 
   export type ScheduleMinOrderByAggregateInput = {
@@ -8857,12 +9023,14 @@ export namespace Prisma {
     theaterId?: SortOrder
     showTime?: SortOrder
     endTime?: SortOrder
+    additionalCost?: SortOrder
   }
 
   export type ScheduleSumOrderByAggregateInput = {
     id?: SortOrder
     movieId?: SortOrder
     theaterId?: SortOrder
+    additionalCost?: SortOrder
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -8887,10 +9055,12 @@ export namespace Prisma {
     actors?: SortOrder
     duration?: SortOrder
     description?: SortOrder
+    price?: SortOrder
   }
 
   export type MovieAvgOrderByAggregateInput = {
     id?: SortOrder
+    price?: SortOrder
   }
 
   export type MovieMaxOrderByAggregateInput = {
@@ -8900,6 +9070,7 @@ export namespace Prisma {
     actors?: SortOrder
     duration?: SortOrder
     description?: SortOrder
+    price?: SortOrder
   }
 
   export type MovieMinOrderByAggregateInput = {
@@ -8909,10 +9080,12 @@ export namespace Prisma {
     actors?: SortOrder
     duration?: SortOrder
     description?: SortOrder
+    price?: SortOrder
   }
 
   export type MovieSumOrderByAggregateInput = {
     id?: SortOrder
+    price?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9169,6 +9342,10 @@ export namespace Prisma {
     create?: XOR<ReservationCreateWithoutSeatsInput, ReservationUncheckedCreateWithoutSeatsInput> | ReservationCreateWithoutSeatsInput[] | ReservationUncheckedCreateWithoutSeatsInput[]
     connectOrCreate?: ReservationCreateOrConnectWithoutSeatsInput | ReservationCreateOrConnectWithoutSeatsInput[]
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type EnumSeatTypeFieldUpdateOperationsInput = {
+    set?: $Enums.SeatType
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -9452,9 +9629,26 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedEnumSeatTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SeatType | EnumSeatTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SeatType[] | ListEnumSeatTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SeatType[] | ListEnumSeatTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeatTypeFilter<$PrismaModel> | $Enums.SeatType
+  }
+
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedEnumSeatTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SeatType | EnumSeatTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SeatType[] | ListEnumSeatTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SeatType[] | ListEnumSeatTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSeatTypeWithAggregatesFilter<$PrismaModel> | $Enums.SeatType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSeatTypeFilter<$PrismaModel>
+    _max?: NestedEnumSeatTypeFilter<$PrismaModel>
   }
 
   export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9562,6 +9756,8 @@ export namespace Prisma {
   export type SeatCreateWithoutReservationsInput = {
     row: number
     number: number
+    type?: $Enums.SeatType
+    additionalCost: number
     reserved?: boolean | null
     theater: TheaterCreateNestedOneWithoutSeatsInput
   }
@@ -9571,6 +9767,8 @@ export namespace Prisma {
     theaterId: number
     row: number
     number: number
+    type?: $Enums.SeatType
+    additionalCost: number
     reserved?: boolean | null
   }
 
@@ -9608,6 +9806,7 @@ export namespace Prisma {
   export type ScheduleCreateWithoutReservationsInput = {
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
     movie: MovieCreateNestedOneWithoutScheduleInput
     theater: TheaterCreateNestedOneWithoutSchedulesInput
   }
@@ -9618,6 +9817,7 @@ export namespace Prisma {
     theaterId: number
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
   }
 
   export type ScheduleCreateOrConnectWithoutReservationsInput = {
@@ -9649,6 +9849,8 @@ export namespace Prisma {
     theaterId?: IntFilter<"Seat"> | number
     row?: IntFilter<"Seat"> | number
     number?: IntFilter<"Seat"> | number
+    type?: EnumSeatTypeFilter<"Seat"> | $Enums.SeatType
+    additionalCost?: FloatFilter<"Seat"> | number
     reserved?: BoolNullableFilter<"Seat"> | boolean | null
   }
 
@@ -9698,6 +9900,7 @@ export namespace Prisma {
   export type ScheduleUpdateWithoutReservationsInput = {
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     movie?: MovieUpdateOneRequiredWithoutScheduleNestedInput
     theater?: TheaterUpdateOneRequiredWithoutSchedulesNestedInput
   }
@@ -9708,11 +9911,13 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
   }
 
   export type ScheduleCreateWithoutTheaterInput = {
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
     movie: MovieCreateNestedOneWithoutScheduleInput
     reservations?: ReservationCreateNestedManyWithoutScheduleInput
   }
@@ -9722,6 +9927,7 @@ export namespace Prisma {
     movieId: number
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
     reservations?: ReservationUncheckedCreateNestedManyWithoutScheduleInput
   }
 
@@ -9738,6 +9944,8 @@ export namespace Prisma {
   export type SeatCreateWithoutTheaterInput = {
     row: number
     number: number
+    type?: $Enums.SeatType
+    additionalCost: number
     reserved?: boolean | null
     reservations?: ReservationCreateNestedManyWithoutSeatsInput
   }
@@ -9746,6 +9954,8 @@ export namespace Prisma {
     id?: number
     row: number
     number: number
+    type?: $Enums.SeatType
+    additionalCost: number
     reserved?: boolean | null
     reservations?: ReservationUncheckedCreateNestedManyWithoutSeatsInput
   }
@@ -9785,6 +9995,7 @@ export namespace Prisma {
     theaterId?: IntFilter<"Schedule"> | number
     showTime?: DateTimeFilter<"Schedule"> | Date | string
     endTime?: DateTimeFilter<"Schedule"> | Date | string
+    additionalCost?: FloatFilter<"Schedule"> | number
   }
 
   export type SeatUpsertWithWhereUniqueWithoutTheaterInput = {
@@ -9891,6 +10102,7 @@ export namespace Prisma {
     actors?: string | null
     duration: string
     description?: string | null
+    price: number
   }
 
   export type MovieUncheckedCreateWithoutScheduleInput = {
@@ -9900,6 +10112,7 @@ export namespace Prisma {
     actors?: string | null
     duration: string
     description?: string | null
+    price: number
   }
 
   export type MovieCreateOrConnectWithoutScheduleInput = {
@@ -9969,6 +10182,7 @@ export namespace Prisma {
     actors?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: FloatFieldUpdateOperationsInput | number
   }
 
   export type MovieUncheckedUpdateWithoutScheduleInput = {
@@ -9978,6 +10192,7 @@ export namespace Prisma {
     actors?: NullableStringFieldUpdateOperationsInput | string | null
     duration?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: FloatFieldUpdateOperationsInput | number
   }
 
   export type TheaterUpsertWithoutSchedulesInput = {
@@ -10025,6 +10240,7 @@ export namespace Prisma {
   export type ScheduleCreateWithoutMovieInput = {
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
     theater: TheaterCreateNestedOneWithoutSchedulesInput
     reservations?: ReservationCreateNestedManyWithoutScheduleInput
   }
@@ -10034,6 +10250,7 @@ export namespace Prisma {
     theaterId: number
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
     reservations?: ReservationUncheckedCreateNestedManyWithoutScheduleInput
   }
 
@@ -10095,6 +10312,8 @@ export namespace Prisma {
   export type SeatUpdateWithoutReservationsInput = {
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
+    type?: EnumSeatTypeFieldUpdateOperationsInput | $Enums.SeatType
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
     theater?: TheaterUpdateOneRequiredWithoutSeatsNestedInput
   }
@@ -10104,6 +10323,8 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
+    type?: EnumSeatTypeFieldUpdateOperationsInput | $Enums.SeatType
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
@@ -10112,6 +10333,8 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
+    type?: EnumSeatTypeFieldUpdateOperationsInput | $Enums.SeatType
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
@@ -10120,18 +10343,22 @@ export namespace Prisma {
     movieId: number
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
   }
 
   export type SeatCreateManyTheaterInput = {
     id?: number
     row: number
     number: number
+    type?: $Enums.SeatType
+    additionalCost: number
     reserved?: boolean | null
   }
 
   export type ScheduleUpdateWithoutTheaterInput = {
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     movie?: MovieUpdateOneRequiredWithoutScheduleNestedInput
     reservations?: ReservationUpdateManyWithoutScheduleNestedInput
   }
@@ -10141,6 +10368,7 @@ export namespace Prisma {
     movieId?: IntFieldUpdateOperationsInput | number
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reservations?: ReservationUncheckedUpdateManyWithoutScheduleNestedInput
   }
 
@@ -10149,11 +10377,14 @@ export namespace Prisma {
     movieId?: IntFieldUpdateOperationsInput | number
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
   }
 
   export type SeatUpdateWithoutTheaterInput = {
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
+    type?: EnumSeatTypeFieldUpdateOperationsInput | $Enums.SeatType
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
     reservations?: ReservationUpdateManyWithoutSeatsNestedInput
   }
@@ -10162,6 +10393,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
+    type?: EnumSeatTypeFieldUpdateOperationsInput | $Enums.SeatType
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
     reservations?: ReservationUncheckedUpdateManyWithoutSeatsNestedInput
   }
@@ -10170,6 +10403,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     row?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
+    type?: EnumSeatTypeFieldUpdateOperationsInput | $Enums.SeatType
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reserved?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
@@ -10230,11 +10465,13 @@ export namespace Prisma {
     theaterId: number
     showTime: Date | string
     endTime: Date | string
+    additionalCost: number
   }
 
   export type ScheduleUpdateWithoutMovieInput = {
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     theater?: TheaterUpdateOneRequiredWithoutSchedulesNestedInput
     reservations?: ReservationUpdateManyWithoutScheduleNestedInput
   }
@@ -10244,6 +10481,7 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
     reservations?: ReservationUncheckedUpdateManyWithoutScheduleNestedInput
   }
 
@@ -10252,6 +10490,7 @@ export namespace Prisma {
     theaterId?: IntFieldUpdateOperationsInput | number
     showTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalCost?: FloatFieldUpdateOperationsInput | number
   }
 
 

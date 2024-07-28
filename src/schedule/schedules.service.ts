@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/shared/prisma.service';
 import { SchedulesDto } from './dto/schedules.dto';
 import { Schedule } from 'prisma/generated/client';
@@ -19,6 +19,19 @@ export class SchedulesService {
     const schedule = await this.prismaService.schedule.create({
       data: { theaterId: dto.theaterId, movieId: dto.movieId, showTime: dto.showTime, endTime: dto.endTime },
     });
+
+    return { schedule };
+  }
+
+  async getSchedule(id: number): Promise<{ schedule: Schedule }> {
+    const schedule = await this.prismaService.schedule.findUnique({
+      where: { id },
+      include: { movie: true, theater: true, reservations: true },
+    });
+
+    if (!schedule) {
+      throw new NotFoundException('Shcedule not found.');
+    }
 
     return { schedule };
   }

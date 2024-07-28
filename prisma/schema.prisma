@@ -30,9 +30,9 @@ model Reservation {
   id            Int           @id @default(autoincrement())
   userId        Int
   scheduleId    Int
-  seats         Seat[]
   paymentStatus PaymentStatus @default(Pending)
   totalAmount   Float
+  seats         Seat[]
   user          User          @relation(fields: [userId], references: [id])
   schedule      Schedule      @relation(fields: [scheduleId], references: [id])
 }
@@ -47,24 +47,27 @@ model Theater {
 }
 
 model Seat {
-  id           Int           @id @default(autoincrement())
-  theaterId    Int
-  row          Int
-  number       Int
-  reserved     Boolean?      @default(false)
-  theater      Theater       @relation(fields: [theaterId], references: [id])
-  reservations Reservation[]
+  id             Int           @id @default(autoincrement())
+  theaterId      Int
+  row            Int
+  number         Int
+  type           SeatType      @default(Normal)
+  additionalCost Float
+  reserved       Boolean?      @default(false)
+  theater        Theater       @relation(fields: [theaterId], references: [id])
+  reservations   Reservation[]
 }
 
 model Schedule {
-  id           Int           @id @default(autoincrement())
-  movieId      Int
-  theaterId    Int
-  showTime     DateTime
-  endTime      DateTime
-  movie        Movie         @relation(fields: [movieId], references: [id])
-  theater      Theater       @relation(fields: [theaterId], references: [id])
-  reservations Reservation[]
+  id             Int           @id @default(autoincrement())
+  movieId        Int
+  theaterId      Int
+  showTime       DateTime
+  endTime        DateTime
+  additionalCost Float
+  movie          Movie         @relation(fields: [movieId], references: [id])
+  theater        Theater       @relation(fields: [theaterId], references: [id])
+  reservations   Reservation[]
 }
 
 model Movie {
@@ -74,6 +77,7 @@ model Movie {
   actors      String?
   duration    String
   description String?
+  price       Float
   schedule    Schedule[]
 }
 
@@ -83,4 +87,9 @@ enum PaymentStatus {
   Completed
   Failed
   Cancelled
+}
+
+enum SeatType {
+  Normal
+  VIP
 }
