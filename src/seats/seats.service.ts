@@ -24,7 +24,14 @@ export class SeatsService {
       throw new BadRequestException('Seat already exists.');
     }
 
-    const seat = await this.prismaService.seat.create({ data: { ...dto } });
+    let cost = 0;
+    if (dto.type === 'VIP') {
+      cost = +100;
+    }
+
+    const seat = await this.prismaService.seat.create({
+      data: { number: dto.number, row: dto.row, theaterId: dto.theaterId, type: dto.type, additionalCost: cost },
+    });
 
     return { seat };
   }

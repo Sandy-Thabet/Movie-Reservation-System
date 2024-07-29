@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsNumber, Matches } from 'class-validator';
 
 export class SchedulesDto {
   @IsNotEmpty()
@@ -10,10 +10,13 @@ export class SchedulesDto {
   theaterId: number;
 
   @IsNotEmpty()
-  // @IsNumber()
-  showTime: Date;
+  date: Date;
 
   @IsNotEmpty()
-  // @IsNumber()
-  endTime: Date;
+  @Matches(/^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/gm)
+  showTime: string;
+
+  @IsNotEmpty()
+  @Matches(/^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/gm)
+  endTime: string;
 }

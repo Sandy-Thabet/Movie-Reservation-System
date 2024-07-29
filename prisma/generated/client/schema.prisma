@@ -27,14 +27,15 @@ model User {
 }
 
 model Reservation {
-  id            Int           @id @default(autoincrement())
+  id            Int            @id @default(autoincrement())
   userId        Int
   scheduleId    Int
-  paymentStatus PaymentStatus @default(Pending)
-  totalAmount   Float
+  paymentStatus PaymentStatus? @default(Pending)
+  totalCost     Float
+  createdAt     DateTime?      @default(now())
   seats         Seat[]
-  user          User          @relation(fields: [userId], references: [id])
-  schedule      Schedule      @relation(fields: [scheduleId], references: [id])
+  user          User           @relation(fields: [userId], references: [id])
+  schedule      Schedule       @relation(fields: [scheduleId], references: [id])
 }
 
 model Theater {
@@ -51,8 +52,8 @@ model Seat {
   theaterId      Int
   row            Int
   number         Int
-  type           SeatType      @default(Normal)
-  additionalCost Float
+  type           SeatType?     @default(Normal)
+  additionalCost Float?
   reserved       Boolean?      @default(false)
   theater        Theater       @relation(fields: [theaterId], references: [id])
   reservations   Reservation[]
@@ -62,9 +63,11 @@ model Schedule {
   id             Int           @id @default(autoincrement())
   movieId        Int
   theaterId      Int
-  showTime       DateTime
-  endTime        DateTime
+  showTime       String
+  endTime        String
+  date           DateTime      @db.Date
   additionalCost Float
+  createdAt      DateTime?     @default(now())
   movie          Movie         @relation(fields: [movieId], references: [id])
   theater        Theater       @relation(fields: [theaterId], references: [id])
   reservations   Reservation[]
@@ -83,7 +86,6 @@ model Movie {
 
 enum PaymentStatus {
   Pending
-  InProgress
   Completed
   Failed
   Cancelled

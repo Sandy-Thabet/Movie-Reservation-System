@@ -135,7 +135,8 @@ exports.Prisma.ReservationScalarFieldEnum = {
   userId: 'userId',
   scheduleId: 'scheduleId',
   paymentStatus: 'paymentStatus',
-  totalAmount: 'totalAmount'
+  totalCost: 'totalCost',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.TheaterScalarFieldEnum = {
@@ -161,7 +162,9 @@ exports.Prisma.ScheduleScalarFieldEnum = {
   theaterId: 'theaterId',
   showTime: 'showTime',
   endTime: 'endTime',
-  additionalCost: 'additionalCost'
+  date: 'date',
+  additionalCost: 'additionalCost',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.MovieScalarFieldEnum = {
@@ -190,7 +193,6 @@ exports.Prisma.NullsOrder = {
 };
 exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   Pending: 'Pending',
-  InProgress: 'InProgress',
   Completed: 'Completed',
   Failed: 'Failed',
   Cancelled: 'Cancelled'

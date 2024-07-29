@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class MovieDto {
   @IsNotEmpty()
@@ -20,4 +20,7 @@ export class MovieDto {
   @IsOptional()
   @IsString()
   description: string;
+
+  @IsNumber()
+  price: number;
 }

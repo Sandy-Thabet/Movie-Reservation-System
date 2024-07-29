@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Schedule" ALTER COLUMN "endTime" SET DATA TYPE TEXT,
+ALTER COLUMN "showTime" SET DATA TYPE TEXT;

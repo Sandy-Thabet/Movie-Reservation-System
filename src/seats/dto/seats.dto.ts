@@ -1,4 +1,5 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { SeatType } from 'prisma/generated/client';
 
 export class SeatsDto {
   @IsNumber()
@@ -16,4 +17,8 @@ export class SeatsDto {
   @IsOptional()
   @IsBoolean()
   reserved: boolean;
+
+  @IsString()
+  @IsEnum(SeatType)
+  type: SeatType;
 }
