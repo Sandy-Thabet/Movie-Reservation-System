@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString, Min } from 'class-validator';
 
 export class MovieDto {
   @IsNotEmpty()
@@ -21,6 +21,7 @@ export class MovieDto {
   @IsString()
   description: string;
 
-  @IsNumber()
+  @IsInt()
+  @Min(50)
   price: number;
 }

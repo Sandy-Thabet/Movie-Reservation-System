@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { MovieDto } from './dto/movies.dto';
-import { FilterationDto } from './dto/filteration.dto';
+import { FilterationDto } from './dto/movie-filteration.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('movies')
@@ -15,8 +15,8 @@ export class MoviesController {
   }
 
   @Get('')
-  getMovies(@Query() dto: FilterationDto) {
-    return this.moviesService.getMovies(dto);
+  getAllMovies(@Query() dto: FilterationDto) {
+    return this.moviesService.getAllMovies(dto);
   }
 
   @Get(':id')

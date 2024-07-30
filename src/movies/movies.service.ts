@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/shared/prisma.service';
 import { MovieDto } from './dto/movies.dto';
-import { FilterationDto } from './dto/filteration.dto';
+import { FilterationDto } from './dto/movie-filteration.dto';
 import { Movie } from 'prisma/generated/client';
 
 @Injectable()
@@ -9,7 +9,9 @@ export class MoviesService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async addMovie(dto: MovieDto): Promise<{ movie: Movie }> {
-    const isExist = await this.prismaService.movie.findFirst({ where: { title: dto.title, duration: dto.duration, genre: dto.genre } });
+    const isExist = await this.prismaService.movie.findFirst({
+      where: { title: dto.title, duration: dto.duration, genre: dto.genre, price: dto.price },
+    });
 
     if (isExist) {
       throw new BadRequestException('Movie is already exist.');
@@ -20,7 +22,7 @@ export class MoviesService {
     return { movie };
   }
 
-  async getMovies(dto: FilterationDto): Promise<{ total: number; movies: object }> {
+  async getAllMovies(dto: FilterationDto): Promise<{ total: number; movies: object; results: number }> {
     const [total, movies] = await Promise.all([
       this.prismaService.movie.count({
         where: {
@@ -28,6 +30,7 @@ export class MoviesService {
           genre: dto.genre || undefined,
           actors: dto.actors || undefined,
           duration: dto.duration || undefined,
+          price: dto.price || undefined,
           // Add more filters as needed
         },
       }),
@@ -37,6 +40,7 @@ export class MoviesService {
           genre: dto.genre || undefined,
           actors: dto.actors || undefined,
           duration: dto.duration || undefined,
+          price: dto.price || undefined,
           // Add more filters as needed
         },
         skip: (dto.page - 1) * dto.size,
@@ -45,7 +49,7 @@ export class MoviesService {
       }),
     ]);
 
-    return { total, movies };
+    return { total, results: movies.length, movies };
   }
 
   async getMovie(id: number): Promise<{ movie: Movie }> {

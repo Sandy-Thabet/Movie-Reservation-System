@@ -1,17 +1,18 @@
-import { IsBoolean, IsEnum, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { IsBoolean, IsEnum, IsNumber, IsOptional } from 'class-validator';
 import { SeatType } from 'prisma/generated/client';
+import { PaginationDto } from 'src/shared/dto/pagination.dto';
 
-export class SeatsDto {
+export class SeatsFilterationDto extends PaginationDto {
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   theaterId: number;
 
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   row: number;
 
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   number: number;
 
   @IsOptional()

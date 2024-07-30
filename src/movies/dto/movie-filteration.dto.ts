@@ -1,7 +1,8 @@
 import { IsInt, IsOptional, IsString, Min } from 'class-validator';
 import { Type } from 'class-transformer';
+import { PaginationDto } from 'src/shared/dto/pagination.dto';
 
-export class FilterationDto {
+export class FilterationDto extends PaginationDto {
   @IsOptional()
   @IsString()
   title?: string;
@@ -18,13 +19,9 @@ export class FilterationDto {
   @IsString()
   duration?: string;
 
-  @Type(() => Number) // Convert to number
+  @IsOptional()
+  @Type(() => Number)
   @IsInt()
-  @Min(1)
-  page: number;
-
-  @Type(() => Number) // Convert to number
-  @IsInt()
-  @Min(1)
-  size: number;
+  @Min(50)
+  price?: number;
 }
