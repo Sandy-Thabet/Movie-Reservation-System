@@ -4,9 +4,13 @@ import { SeatsService } from './seats.service';
 import { SeatsDto } from './dto/seats.dto';
 import { SeatsFilterationDto } from './dto/seats-filteration.dto';
 import { PaginationDto } from 'src/shared/dto/pagination.dto';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { UserRoles } from 'prisma/generated/client';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('seats')
-@UseGuards(JwtAuthGuard)
+@Roles(UserRoles.Admin)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class SeatsController {
   constructor(private readonly seatsService: SeatsService) {}
 

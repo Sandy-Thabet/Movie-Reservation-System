@@ -3,9 +3,13 @@ import { SchedulesDto } from './dto/schedules.dto';
 import { SchedulesService } from './schedules.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { SchedulesFilterationDto } from './dto/schedules-filteration.dto';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { UserRoles } from 'prisma/generated/client';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('schedules')
-@UseGuards(JwtAuthGuard)
+@Roles(UserRoles.Admin)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class SchedulesController {
   constructor(private readonly scheduleService: SchedulesService) {}
 

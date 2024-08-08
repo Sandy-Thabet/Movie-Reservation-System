@@ -3,9 +3,13 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { TheatersService } from './theaters.service';
 import { TheaterDto } from './dto/theaters.dto';
 import { FilterationDto } from './dto/theater-filteration.dto';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { UserRoles } from 'prisma/generated/client';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('theaters')
-@UseGuards(JwtAuthGuard)
+@Roles(UserRoles.Admin)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class TheatersController {
   constructor(private readonly theaterService: TheatersService) {}
 

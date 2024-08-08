@@ -3,9 +3,13 @@ import { MoviesService } from './movies.service';
 import { MovieDto } from './dto/movies.dto';
 import { FilterationDto } from './dto/movie-filteration.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { UserRoles } from 'prisma/generated/client';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('movies')
-@UseGuards(JwtAuthGuard)
+@Roles(UserRoles.Admin)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
